@@ -15,6 +15,8 @@ public class Apriori {
         Apriori apriori = new Apriori();
         Map<List<String>, Double> temp_list;
         apriori.init();
+        ///Users/xiexiaohao/Desktop/management/InformationEngineering/web_scale/shakespeare_basket
+        ///Users/xiexiaohao/Desktop/test
         apriori.iteration(apriori.map, apriori.mapAno, "/Users/xiexiaohao/Desktop/management/InformationEngineering/web_scale/shakespeare_basket");
         int count = 0;
         int k = 40;
@@ -46,7 +48,7 @@ public class Apriori {
                 System.out.println(entry.getKey().toString().substring(1, entry.getKey().toString().length() - 1));
                 System.out.println(entry.getValue());
                 System.out.println("==================");
-                str = entry.getKey().toString().substring(1, entry.getKey().toString().length() - 1) + " " + entry.getValue() + "\n";
+                str = entry.getKey().get(0) + " " + entry.getKey().get(1) + " " + entry.getValue() + "\n";
                 bytes = new byte[512];
                 bytes = str.getBytes();
                 b = bytes.length;
@@ -93,7 +95,7 @@ public class Apriori {
                 String [] word = {database.get(i).get(j)};
                 List<String> item = new ArrayList<>(Arrays.asList(word));
                 if (!map.containsKey(item)) {
-                    map.put(item, 1.0 / database.size());
+                    map.put(item, 1.0);
                 }else {
                     map.put(item, map.get(item) + 1.0);
                 }
@@ -138,7 +140,7 @@ public class Apriori {
         map.clear();
 
         List<List<String>> key_list = new ArrayList<>(mapAno.keySet());
-        for (int i = 0; i < key_list.size(); i++) {
+        for (int i = 0; i < key_list.size() - 1; i++) {
             for (int j = i + 1; j < key_list.size(); j++) {
                 List<String> map_item = new ArrayList<>(arrayUnion(key_list.get(i), key_list.get(j)));
                 map.put(map_item, 0.0);
@@ -157,7 +159,7 @@ public class Apriori {
                     for (int i = 0; i < split.length - 1; i++) {
                         for (int j = i + 1; j < split.length; j++) {
                             list = new ArrayList<>(Arrays.asList(new String[]{split[i], split[j]}));
-                            if (map.containsKey(list)) {
+                            if (map.containsKey(list) || map.containsKey(reverse(list))) {
                                 map.put(list, map.get(list) + 1.0);
                             }
                         }
@@ -179,7 +181,12 @@ public class Apriori {
 //            }
 //        }
         map.entrySet().stream().filter(col -> col.getValue() != 0.0)
-                        .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
         pruning(map, mapAno);
+    }
+
+    public List<String> reverse(List<String> list) {
+        Collections.reverse(list);
+        return list;
     }
 }
