@@ -18,9 +18,9 @@ public class Apriori {
         ///Users/xiexiaohao/Desktop/management/InformationEngineering/web_scale/shakespeare_basket
         ///Users/xiexiaohao/Desktop/test
         apriori.iteration(apriori.map, apriori.mapAno, "/Users/xiexiaohao/Desktop/management/InformationEngineering/web_scale/shakespeare_basket");
-        int count = 0;
-        int k = 40;
+        int k = 40;//取前40个
         List<Map.Entry<List<String>, Double>> list = new ArrayList<>(apriori.map.entrySet());
+        //根据map的value来降序排列
         Collections.sort(list, new Comparator<Map.Entry<List<String>, Double>>() {
 
             @Override
@@ -71,6 +71,7 @@ public class Apriori {
         List<ArrayList<String>> T = new ArrayList<>();
         String str;
         File[] files = new File(filePath).listFiles();
+        //切割数据集
         for (File file : files) {
             try {
                 InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file));
@@ -90,6 +91,7 @@ public class Apriori {
     public void init() {
         database = readFiles("/Users/xiexiaohao/Desktop/management/InformationEngineering/web_scale/shakespeare_basket");
 
+        //获取单个的高频集合
         for (int i = 0; i < database.size(); i++) {
             for (int j = 0; j < database.get(i).size(); j++) {
                 String [] word = {database.get(i).get(j)};
@@ -123,6 +125,7 @@ public class Apriori {
         }
     }
 
+    //把单个高频集合两两组合到一起
     public List<String> arrayUnion(List<String> list1, List<String> list2)
     {
         List<String> list = new ArrayList<>();
@@ -157,8 +160,10 @@ public class Apriori {
                 BufferedReader buffer = new BufferedReader(inputStreamReader);
                 while ((str = buffer.readLine()) != null) {
                     String[] split = str.split(" ");
+                    //每行单词两两组合
                     for (int i = 0; i < split.length - 1; i++) {
                         for (int j = i + 1; j < split.length; j++) {
+                            //高频的word才能两两组合
                             if (mapAno.containsKey(Arrays.asList(new String[]{split[i]})) && mapAno.containsKey(Arrays.asList(new String[]{split[j]}))) {
                                 list = new ArrayList<>(Arrays.asList(new String[]{split[i], split[j]}));
                                 if (map.containsKey(list) || map.containsKey(reverse(list))) {
@@ -191,6 +196,7 @@ public class Apriori {
     }
 
     public List<String> reverse(List<String> list) {
+        //反转list以防遗漏
         Collections.reverse(list);
         return list;
     }
