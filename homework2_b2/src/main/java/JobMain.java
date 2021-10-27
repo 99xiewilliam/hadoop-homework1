@@ -19,7 +19,7 @@ public class JobMain extends Configured implements Tool {
         job.setJarByClass(HomeWork2BMapper.class);
         //job.addCacheArchive();
         //加载缓存文件
-        job.addCacheFile(new URI("/Users/xiexiaohao/Desktop/end/part-r-00000"));
+        job.addCacheFile(new URI("/Users/xiexiaohao/Desktop/endc1/part-r-00000"));
 
         job.setMapperClass(HomeWork2BMapper.class);
         job.setMapOutputKeyClass(Text.class);
@@ -30,7 +30,7 @@ public class JobMain extends Configured implements Tool {
         job.setOutputValueClass(Text.class);
 
         job.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/end1"));
+        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/end1c2"));
 
         boolean b = job.waitForCompletion(true);
 

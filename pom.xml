@@ -27,6 +27,9 @@
         <module>homework_d3</module>
         <module>homework2_b1</module>
         <module>homework2_b2</module>
+        <module>homework2_c</module>
+        <module>homework_c2</module>
+        <module>homework2_c2</module>
     </modules>
 
     <packaging>pom</packaging>

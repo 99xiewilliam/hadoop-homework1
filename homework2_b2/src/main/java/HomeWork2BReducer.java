@@ -61,10 +61,10 @@ public class HomeWork2BReducer extends Reducer<Text, Text, Text, NullWritable> {
         int i = 0;
         for (Map.Entry<List<String>, Double> entry : sortList) {
             mapAno.put(entry.getKey(), entry.getValue());
-            i++;
-            if (i == limited) {
-                break;
-            }
+//            i++;
+//            if (i == limited) {
+//                break;
+//            }
         }
         //Set<List<String>> lists1 = mapAno.keySet();
         for (Map.Entry<List<String>, Double> entry : mapAno.entrySet()) {

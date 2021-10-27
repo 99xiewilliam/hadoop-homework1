@@ -11,10 +11,12 @@
         <module name="mygrouping" />
         <module name="homework_b2zhong" />
         <module name="reduce_join" />
+        <module name="homework2_c" />
         <module name="hadoop_demo" />
         <module name="homework_c" />
         <module name="homework2_b2" />
         <module name="homework2_b1" />
+        <module name="homework2_c2" />
         <module name="myoutputformat" />
         <module name="homework_e1" />
         <module name="homework_b1" />
@@ -30,6 +32,7 @@
     <bytecodeTargetLevel>
       <module name="homeWork1_a1" target="1.8" />
       <module name="homework_b2zhong" target="1.8" />
+      <module name="homework_c2" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
