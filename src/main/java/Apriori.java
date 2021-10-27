@@ -128,7 +128,7 @@ public class Apriori {
         List<String> list = new ArrayList<>();
         list.addAll(list1);
         list.addAll(list2);
-        list = new ArrayList<>(new HashSet<String>(list));
+        list = new ArrayList<>(new HashSet<>(list));
         return list;
     }
     public void iteration(
@@ -143,6 +143,7 @@ public class Apriori {
         for (int i = 0; i < key_list.size() - 1; i++) {
             for (int j = i + 1; j < key_list.size(); j++) {
                 List<String> map_item = new ArrayList<>(arrayUnion(key_list.get(i), key_list.get(j)));
+
                 map.put(map_item, 0.0);
             }
         }
@@ -158,9 +159,13 @@ public class Apriori {
                     String[] split = str.split(" ");
                     for (int i = 0; i < split.length - 1; i++) {
                         for (int j = i + 1; j < split.length; j++) {
-                            list = new ArrayList<>(Arrays.asList(new String[]{split[i], split[j]}));
-                            if (map.containsKey(list) || map.containsKey(reverse(list))) {
-                                map.put(list, map.get(list) + 1.0);
+                            if (mapAno.containsKey(Arrays.asList(new String[]{split[i]})) && mapAno.containsKey(Arrays.asList(new String[]{split[j]}))) {
+                                list = new ArrayList<>(Arrays.asList(new String[]{split[i], split[j]}));
+                                if (map.containsKey(list) || map.containsKey(reverse(list))) {
+                                    map.put(list, map.get(list) + 1.0);
+                                }
+                            }else {
+                                continue;
                             }
                         }
                     }
