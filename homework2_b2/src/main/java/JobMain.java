@@ -18,6 +18,7 @@ public class JobMain extends Configured implements Tool {
         TextInputFormat.addInputPath(job, new Path("/Users/xiexiaohao/Desktop/test"));
         job.setJarByClass(HomeWork2BMapper.class);
         //job.addCacheArchive();
+        //加载缓存文件
         job.addCacheFile(new URI("/Users/xiexiaohao/Desktop/end/part-r-00000"));
 
         job.setMapperClass(HomeWork2BMapper.class);

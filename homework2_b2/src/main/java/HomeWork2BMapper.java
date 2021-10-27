@@ -15,6 +15,7 @@ public class HomeWork2BMapper extends Mapper<LongWritable, Text, Text, Text> {
     private Integer baskets = 0;
     @Override
     protected void setup(Mapper<LongWritable, Text, Text, Text>.Context context) throws IOException, InterruptedException {
+        //获取缓存中的uri
         URI[] uris = context.getCacheFiles();
         //Path cacheFile = new Path(uris[0]);
         System.out.println(uris[0]);
@@ -44,6 +45,7 @@ public class HomeWork2BMapper extends Mapper<LongWritable, Text, Text, Text> {
 
     }
 
+    //计算总共多少行
     @Override
     protected void cleanup(Mapper<LongWritable, Text, Text, Text>.Context context) throws IOException, InterruptedException {
         context.write(new Text("baskets"), new Text(baskets.toString()));

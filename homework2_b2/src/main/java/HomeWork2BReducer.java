@@ -11,7 +11,7 @@ public class HomeWork2BReducer extends Reducer<Text, Text, Text, NullWritable> {
     private Double min_support = 0.005;
     private Integer baskets = 0;
     private Map<List<String>, Double> mapAno = new HashMap<>();
-    private Integer limited = 40;
+    private Integer limited = 40;//只要前40个
 
     @Override
     protected void reduce(Text key, Iterable<Text> values, Reducer<Text, Text, Text, NullWritable>.Context context) throws IOException, InterruptedException {
@@ -50,6 +50,7 @@ public class HomeWork2BReducer extends Reducer<Text, Text, Text, NullWritable> {
             }
         }
         List<Map.Entry<List<String>, Double>> sortList = new ArrayList<>(transmit.entrySet());
+        //排序
         Collections.sort(sortList, new Comparator<Map.Entry<List<String>, Double>>() {
             @Override
             public int compare(Map.Entry<List<String>, Double> o1, Map.Entry<List<String>, Double> o2) {
