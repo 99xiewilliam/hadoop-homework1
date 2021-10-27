@@ -8,36 +8,39 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class JobMain extends Configured implements Tool{
+import javax.lang.model.SourceVersion;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Set;
+
+public class JobMain extends Configured implements Tool {
+
     @Override
     public int run(String[] strings) throws Exception {
-        Job job = Job.getInstance(super.getConf(), "mapreduce_c");
+        Job job = Job.getInstance(super.getConf(), "mapreduce2_b1");
         job.setInputFormatClass(TextInputFormat.class);
-        //TextInputFormat.addInputPath(job, new Path("file:///Users/xiexiaohao/Desktop/mapreduce_c/small"));
-        TextInputFormat.addInputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/medium"));
+        TextInputFormat.addInputPath(job, new Path("/Users/xiexiaohao/Desktop/test"));
 
-        job.setJarByClass(HomeworkCMapper.class);
-        job.setMapperClass(HomeworkCMapper.class);
+        job.setJarByClass(HomeWork2BMapper.class);
+        job.setMapperClass(HomeWork2BMapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(Text.class);
 
-        job.setReducerClass(HomeworkCReducer.class);
+        job.setReducerClass(HomeWork2BReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
         job.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/output_c"));
-        //TextOutputFormat.setOutputPath(job, new Path("file:///Users/xiexiaohao/Desktop/mapreduce_c/output"));
+        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/end"));
 
         boolean b = job.waitForCompletion(true);
-
         return b ? 0 : 1;
     }
 
     public static void main(String[] args) throws Exception {
         Configuration configuration = new Configuration();
         int run = ToolRunner.run(configuration, new JobMain(), args);
-
         System.exit(run);
     }
 }

@@ -13,6 +13,8 @@
         <module name="reduce_join" />
         <module name="hadoop_demo" />
         <module name="homework_c" />
+        <module name="homework2_b2" />
+        <module name="homework2_b1" />
         <module name="myoutputformat" />
         <module name="homework_e1" />
         <module name="homework_b1" />
