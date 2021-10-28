@@ -32,7 +32,7 @@ public class JobMain extends Configured implements Tool {
         job.setOutputValueClass(Text.class);
 
         job.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/endc1"));
+        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/b1"));
 
         boolean b = job.waitForCompletion(true);
         return b ? 0 : 1;

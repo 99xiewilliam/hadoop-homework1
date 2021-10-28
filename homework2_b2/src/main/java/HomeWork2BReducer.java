@@ -60,16 +60,17 @@ public class HomeWork2BReducer extends Reducer<Text, Text, Text, NullWritable> {
         });
         int i = 0;
         for (Map.Entry<List<String>, Double> entry : sortList) {
-            mapAno.put(entry.getKey(), entry.getValue());
-//            i++;
-//            if (i == limited) {
-//                break;
-//            }
+//            mapAno.put(entry.getKey(), entry.getValue());
+            context.write(new Text(entry.getKey().get(0).toString() + " " + entry.getKey().get(1) + " " + entry.getValue()), NullWritable.get());
+            i++;
+            if (i == limited) {
+                break;
+            }
         }
         //Set<List<String>> lists1 = mapAno.keySet();
-        for (Map.Entry<List<String>, Double> entry : mapAno.entrySet()) {
-            context.write(new Text(entry.getKey().get(0).toString() + " " + entry.getKey().get(1) + " " + entry.getValue()), NullWritable.get());
-        }
+//        for (Map.Entry<List<String>, Double> entry : mapAno.entrySet()) {
+//            context.write(new Text(entry.getKey().get(0).toString() + " " + entry.getKey().get(1) + " " + entry.getValue()), NullWritable.get());
+//        }
 
 //        for (List<String> list : lists1) {
 //            context.write(new Text(list.get(0).toString() + " " + list.get(1) + " " + mapAno.get(list)), NullWritable.get());
