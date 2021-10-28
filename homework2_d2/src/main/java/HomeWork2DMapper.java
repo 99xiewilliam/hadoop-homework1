@@ -6,6 +6,7 @@ import org.apache.hadoop.yarn.webapp.hamlet.Hamlet;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.StandardSocketOptions;
 import java.net.URI;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -50,10 +51,19 @@ public class HomeWork2DMapper extends Mapper<LongWritable, Text, Text, Text> {
 
         Set<List<String>> sets = map.keySet();
         List<String> list;
+        List<String> list1 = new ArrayList<>();
+        list1.add("thy");
+        list1.add("thee");
         for (List<String> set : sets) {
-            if (map.get(set) >= min_support * baskets) {
-                context.write(new Text(set.get(0) + " " + set.get(1)), new Text(map.get(set).toString()));
+            if (set.containsAll(list1) || set.containsAll(reverse(list1))) {
+                System.out.println("=-=-====-=-=--==-=-=-=-==-=-=--=-=-=-=-");
+                System.out.println(map.get(set));
+                System.out.println(baskets*min_support);
             }
+//            if (map.get(set) >= min_support * baskets) {
+//                context.write(new Text(set.get(0) + " " + set.get(1)), new Text(map.get(set).toString()));
+//            }
+            context.write(new Text(set.get(0) + " " + set.get(1)), new Text(map.get(set).toString()));
         }
     }
     public List<String> reverse(List<String> list) {
