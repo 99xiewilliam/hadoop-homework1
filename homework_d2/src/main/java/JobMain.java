@@ -33,6 +33,8 @@ public class JobMain extends Configured implements Tool {
         TextOutputFormat.setOutputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/output_d2_4"));
 
         boolean b = job.waitForCompletion(true);
+
+
         return b ? 0 : 1;
     }
 
