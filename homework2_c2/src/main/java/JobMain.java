@@ -46,7 +46,7 @@ public class JobMain extends Configured implements Tool {
         job.setJarByClass(JobMain.class);
         String uri = "hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/c1/part-r-00000#test";
         DistributedCache.addCacheFile(new URI(uri), config);
-        job.addCacheFile(new URI("uri"));
+        job.addCacheFile(new URI(uri));
         job.setMapperClass(HomeWork2CMapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(Text.class);

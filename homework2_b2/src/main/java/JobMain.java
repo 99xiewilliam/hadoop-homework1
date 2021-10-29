@@ -17,7 +17,7 @@ public class JobMain extends Configured implements Tool {
         Job job1 = Job.getInstance(super.getConf(), "mapreduce2_b1");
         job1.setInputFormatClass(TextInputFormat.class);
         TextInputFormat.addInputPath(job1, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/shakespeare_basket"));
-
+        TextInputFormat.setMaxInputSplitSize(job1, 11090571);
         job1.setJarByClass(JobMain.class);
         job1.setMapperClass(HomeWork21BMapper.class);
         job1.setMapOutputKeyClass(Text.class);
@@ -40,6 +40,7 @@ public class JobMain extends Configured implements Tool {
         Job job = Job.getInstance(config, "mapreduce_b2");
         job.setInputFormatClass(TextInputFormat.class);
         TextInputFormat.addInputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/shakespeare_basket"));
+        TextInputFormat.setMaxInputSplitSize(job, 11090571);
         job.setJarByClass(JobMain.class);
         //job.addCacheArchive();
         //加载缓存文件

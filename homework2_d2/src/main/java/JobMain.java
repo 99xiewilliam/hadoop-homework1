@@ -18,7 +18,7 @@ public class JobMain extends Configured implements Tool {
         job1.setInputFormatClass(TextInputFormat.class);
         job1.setJarByClass(HomeWork22DMapper.class);
         TextInputFormat.addInputPath(job1, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/shakespeare_basket"));
-        //TextInputFormat.setMaxInputSplitSize(job, 11090571);
+        TextInputFormat.setMaxInputSplitSize(job1, 11090571);
 
         job1.setMapperClass(HomeWork22DMapper.class);
         job1.setMapOutputKeyClass(Text.class);
@@ -29,7 +29,7 @@ public class JobMain extends Configured implements Tool {
         job1.setOutputValueClass(Text.class);
 
         job1.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job1, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/c1"));
+        TextOutputFormat.setOutputPath(job1, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/d1"));
 
         boolean b1 = job1.waitForCompletion(true);
 
@@ -43,9 +43,9 @@ public class JobMain extends Configured implements Tool {
         job.setJarByClass(HomeWork2DMapper.class);
         String uri = "hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/b1/part-r-00000#test";
         DistributedCache.addCacheFile(new URI(uri), config);
-        job.addCacheFile(new URI("uri"));
+        job.addCacheFile(new URI(uri));
         TextInputFormat.addInputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/shakespeare_basket"));
-        //TextInputFormat.setMaxInputSplitSize(job, 11090571);
+        TextInputFormat.setMaxInputSplitSize(job, 11090571);
 
         job.setMapperClass(HomeWork2DMapper.class);
         job.setMapOutputKeyClass(Text.class);
