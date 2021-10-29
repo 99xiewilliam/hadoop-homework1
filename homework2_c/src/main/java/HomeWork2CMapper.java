@@ -135,7 +135,6 @@ public class HomeWork2CMapper extends Mapper<LongWritable, Text, Text, Text> {
         Set<String> set = new HashSet<>();
         set.addAll(set1);
         set.addAll(set2);
-
         return set;
     }
 
