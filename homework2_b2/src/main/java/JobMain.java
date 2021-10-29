@@ -13,10 +13,28 @@ import java.net.URI;
 public class JobMain extends Configured implements Tool {
     @Override
     public int run(String[] strings) throws Exception {
+        Job job1 = Job.getInstance(super.getConf(), "mapreduce2_b1");
+        job1.setInputFormatClass(TextInputFormat.class);
+        TextInputFormat.addInputPath(job1, new Path("/Users/xiexiaohao/Desktop/test"));
+
+        job1.setJarByClass(JobMain.class);
+        job1.setMapperClass(HomeWork21BMapper.class);
+        job1.setMapOutputKeyClass(Text.class);
+        job1.setMapOutputValueClass(Text.class);
+
+        job1.setReducerClass(HomeWork21BReducer.class);
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(Text.class);
+
+        job1.setOutputFormatClass(TextOutputFormat.class);
+        TextOutputFormat.setOutputPath(job1, new Path("/Users/xiexiaohao/Desktop/b1"));
+
+        boolean b1 = job1.waitForCompletion(true);
+
         Job job = Job.getInstance(super.getConf(), "mapreduce_b2");
         job.setInputFormatClass(TextInputFormat.class);
         TextInputFormat.addInputPath(job, new Path("/Users/xiexiaohao/Desktop/test"));
-        job.setJarByClass(HomeWork2BMapper.class);
+        job.setJarByClass(JobMain.class);
         //job.addCacheArchive();
         //加载缓存文件
         job.addCacheFile(new URI("/Users/xiexiaohao/Desktop/b1/part-r-00000"));

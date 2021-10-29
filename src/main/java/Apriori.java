@@ -2,6 +2,8 @@ import org.apache.hadoop.mapred.IFileOutputStream;
 import org.apache.hadoop.yarn.webapp.hamlet.Hamlet;
 
 import java.io.*;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,6 +14,7 @@ public class Apriori {
     //private Map<List<String>, Double> map_all = new HashMap<>();
     private Double min_support = 0.005;
     public static void main(String[] args) {
+        Instant insOne = Instant.now();
         Apriori apriori = new Apriori();
         Map<List<String>, Double> temp_list;
         apriori.init();
@@ -30,7 +33,7 @@ public class Apriori {
             }
         });
         int i = 0;
-        File txt = new File("/Users/xiexiaohao/Desktop/management/InformationEngineering/web_scale/shakespeare_basket/123.txt");
+        File txt = new File("/Users/xiexiaohao/Desktop/management/InformationEngineering/web_scale/shakespeare_basket/a.txt");
         if (!txt.exists()) {
             try {
                 txt.createNewFile();
@@ -58,6 +61,8 @@ public class Apriori {
                 }
             }
             fos.close();
+            Instant insTwo = Instant.now();
+            System.out.println("以毫秒计时差" + Duration.between(insOne, insTwo).toMillis());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -48,7 +48,6 @@ public class HomeWork22DMapper extends Mapper<LongWritable, Text, Text, Text> {
 
     public void init() {
         baskets = database.size();
-
         for (int i = 0; i < baskets; i++) {
             for (int j = 0; j < database.get(i).size(); j++) {
                 Set<String> set = new HashSet<>(Arrays.asList(new String[]{database.get(i).get(j)}));
