@@ -18,7 +18,7 @@ public class HomeWork2CMapper extends Mapper<LongWritable, Text, Text, Text> {
     @Override
     protected void setup(Mapper<LongWritable, Text, Text, Text>.Context context) throws IOException, InterruptedException {
         URI[] cacheFiles = context.getCacheFiles();
-        FileReader in = new FileReader(cacheFiles[0].getPath());
+        FileReader in = new FileReader("./test");
         BufferedReader bufferedReader = new BufferedReader(in);
         String str;
 

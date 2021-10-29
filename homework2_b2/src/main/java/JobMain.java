@@ -3,6 +3,7 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.filecache.DistributedCache;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -15,7 +16,7 @@ public class JobMain extends Configured implements Tool {
     public int run(String[] strings) throws Exception {
         Job job1 = Job.getInstance(super.getConf(), "mapreduce2_b1");
         job1.setInputFormatClass(TextInputFormat.class);
-        TextInputFormat.addInputPath(job1, new Path("/Users/xiexiaohao/Desktop/test"));
+        TextInputFormat.addInputPath(job1, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/shakespeare_basket"));
 
         job1.setJarByClass(JobMain.class);
         job1.setMapperClass(HomeWork21BMapper.class);
@@ -27,17 +28,26 @@ public class JobMain extends Configured implements Tool {
         job1.setOutputValueClass(Text.class);
 
         job1.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job1, new Path("/Users/xiexiaohao/Desktop/b1"));
+        TextOutputFormat.setOutputPath(job1, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/b1"));
 
         boolean b1 = job1.waitForCompletion(true);
 
-        Job job = Job.getInstance(super.getConf(), "mapreduce_b2");
+
+        Configuration config = super.getConf();
+        config.set("fs.defaultFS", "hdfs://dicvmc2.ie.cuhk.edu.hk:8020");
+        config.set("mapreduce.framework.name", "yarn");
+        config.set("yarn.resourcemanager.hostname", "dicvmc2.ie.cuhk.edu.hk");
+        Job job = Job.getInstance(config, "mapreduce_b2");
         job.setInputFormatClass(TextInputFormat.class);
-        TextInputFormat.addInputPath(job, new Path("/Users/xiexiaohao/Desktop/test"));
+        TextInputFormat.addInputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/shakespeare_basket"));
         job.setJarByClass(JobMain.class);
         //job.addCacheArchive();
         //加载缓存文件
-        job.addCacheFile(new URI("/Users/xiexiaohao/Desktop/b1/part-r-00000"));
+        String uri = "hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/b1/part-r-00000#test";
+        //job.addCacheFile(URI.create(uri));
+
+        DistributedCache.addCacheFile(new URI(uri), config);
+        job.addCacheFile(new URI(uri));
 
         job.setMapperClass(HomeWork2BMapper.class);
         job.setMapOutputKeyClass(Text.class);
@@ -48,7 +58,7 @@ public class JobMain extends Configured implements Tool {
         job.setOutputValueClass(Text.class);
 
         job.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/b2"));
+        TextOutputFormat.setOutputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/b2"));
 
         boolean b = job.waitForCompletion(true);
 

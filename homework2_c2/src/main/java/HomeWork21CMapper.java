@@ -36,6 +36,16 @@ public class HomeWork21CMapper extends Mapper<LongWritable, Text, Text, Text> {
     @Override
     protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, Text>.Context context) throws IOException, InterruptedException {
         String[] split = value.toString().split(" ");
+        for (int i = 0; i < split.length; i++) {
+            String[] word = { split[i] };
+            Set<String> item = new HashSet<>(Arrays.asList(word));
+            if (!map.containsKey(item)) {
+                map.put(item, 1.0);
+            }else {
+                map.put(item, map.get(item) + 1.0);
+            }
+        }
+        basketsNum++;
         getTable(split);
 //        for (int i = 0; i < split.length - 2; i++) {
 //            for (int j = i + 1; j < split.length - 1; j++) {
@@ -81,18 +91,18 @@ public class HomeWork21CMapper extends Mapper<LongWritable, Text, Text, Text> {
 
     }
     public void init() {
-        basketsNum = database.size();
-        for (int i = 0; i < database.size(); i++) {
-            for (int j = 0; j < database.get(i).size(); j++) {
-                String[] word = { database.get(i).get(j) };
-                Set<String> item = new HashSet<>(Arrays.asList(word));
-                if (!map.containsKey(item)) {
-                    map.put(item, 1.0);
-                }else {
-                    map.put(item, map.get(item) + 1.0);
-                }
-            }
-        }
+        //basketsNum = database.size();
+//        for (int i = 0; i < database.size(); i++) {
+//            for (int j = 0; j < database.get(i).size(); j++) {
+//                String[] word = { database.get(i).get(j) };
+//                Set<String> item = new HashSet<>(Arrays.asList(word));
+//                if (!map.containsKey(item)) {
+//                    map.put(item, 1.0);
+//                }else {
+//                    map.put(item, map.get(item) + 1.0);
+//                }
+//            }
+//        }
         pruning();
     }
 

@@ -18,6 +18,15 @@ public class HomeWork22DMapper extends Mapper<LongWritable, Text, Text, Text> {
     protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, Text>.Context context) throws IOException, InterruptedException {
         String[] split = value.toString().split(" ");
         getTable(split);
+        for (int i = 0; i < split.length; i++) {
+            Set<String> set = new HashSet<>(Arrays.asList(new String[]{split[i]}));
+            if (!map.containsKey(set)) {
+                map.put(set, 1.0);
+            }else {
+                map.put(set, map.get(set) + 1.0);
+            }
+        }
+        baskets++;
     }
 
     @Override
@@ -47,17 +56,18 @@ public class HomeWork22DMapper extends Mapper<LongWritable, Text, Text, Text> {
     }
 
     public void init() {
-        baskets = database.size();
-        for (int i = 0; i < baskets; i++) {
-            for (int j = 0; j < database.get(i).size(); j++) {
-                Set<String> set = new HashSet<>(Arrays.asList(new String[]{database.get(i).get(j)}));
-                if (!map.containsKey(set)) {
-                    map.put(set, 1.0);
-                }else {
-                    map.put(set, map.get(set) + 1.0);
-                }
-            }
-        }
+        //baskets = database.size();
+
+//        for (int i = 0; i < baskets; i++) {
+//            for (int j = 0; j < database.get(i).size(); j++) {
+//                Set<String> set = new HashSet<>(Arrays.asList(new String[]{database.get(i).get(j)}));
+//                if (!map.containsKey(set)) {
+//                    map.put(set, 1.0);
+//                }else {
+//                    map.put(set, map.get(set) + 1.0);
+//                }
+//            }
+//        }
 
         pruning();
     }

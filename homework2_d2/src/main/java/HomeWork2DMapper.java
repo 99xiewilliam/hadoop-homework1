@@ -20,7 +20,7 @@ public class HomeWork2DMapper extends Mapper<LongWritable, Text, Text, Text> {
     @Override
     protected void setup(Mapper<LongWritable, Text, Text, Text>.Context context) throws IOException, InterruptedException {
         URI[] cacheFiles = context.getCacheFiles();
-        FileReader in = new FileReader(cacheFiles[0].getPath());
+        FileReader in = new FileReader("./test");
         BufferedReader buffer = new BufferedReader(in);
         String str;
         List<String> set;
