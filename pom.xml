@@ -31,6 +31,7 @@
         <module>homework2_d</module>
         <module>homework2_d2</module>
         <module>homework3_q2a</module>
+        <module>homework3_q2b</module>
     </modules>
 
     <packaging>pom</packaging>

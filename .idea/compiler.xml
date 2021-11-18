@@ -6,30 +6,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="homework3_q2b" />
         <module name="homework3_q2a" />
         <module name="homework_a2" />
         <module name="homework_a3" />
-        <module name="mygrouping" />
-        <module name="homework_b2zhong" />
-        <module name="reduce_join" />
         <module name="homework2_d" />
         <module name="homework2_c" />
         <module name="hadoop_demo" />
         <module name="homework_c" />
-        <module name="homework2_b2" />
-        <module name="homework2_b1" />
         <module name="homework2_c2" />
-        <module name="homework2_d2" />
         <module name="myoutputformat" />
-        <module name="homework_e1" />
         <module name="homework_b1" />
         <module name="homework_d3" />
-        <module name="homework_a1" />
         <module name="homework_b2" />
-        <module name="small_file" />
-        <module name="homework_e2" />
         <module name="homework_d1" />
         <module name="homework_d2" />
+        <module name="mygrouping" />
+        <module name="homework_b2zhong" />
+        <module name="reduce_join" />
+        <module name="homework2_b2" />
+        <module name="homework2_b1" />
+        <module name="homework2_d2" />
+        <module name="homework_e1" />
+        <module name="homework_a1" />
+        <module name="small_file" />
+        <module name="homework_e2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -25,13 +25,14 @@ public class JobMain extends Configured implements Tool {
 //        config.set("yarn.resourcemanager.hostname", "dicvmc2.ie.cuhk.edu.hk");
         Job job = Job.getInstance(config, "mapreduce_q2a");
         job.setInputFormatClass(TextInputFormat.class);
-        TextInputFormat.addInputPath(job, new Path("/Users/xiexiaohao/IdeaProjects/DataSructure/trainImage.txt"));
+        TextInputFormat.addInputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/trainImage.txt"));
         //TextInputFormat.setMaxInputSplitSize(job, 10176799);
         job.setJarByClass(JobMain.class);
 
-        //String uri = "/Users/xiexiaohao/Desktop/centroids.txt";
-        String uri = "/Users/xiexiaohao/Desktop/q2a/end5/part-r-00000";
-        DistributedCache.addCacheFile(new URI(uri), config);
+        String uri = "hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/centroids.txt";
+        //String uri = "/Users/xiexiaohao/IdeaProjects/DataSructure/centroid1.txt";
+        //String uri = "/Users/xiexiaohao/Desktop/q2a/endTest2/part-r-00000";
+        //DistributedCache.addCacheFile(new URI(uri), config);
         job.addCacheFile(new URI(uri));
 
         job.setMapperClass(KMeansMapper.class);
@@ -45,7 +46,7 @@ public class JobMain extends Configured implements Tool {
         job.setOutputValueClass(Text.class);
 
         job.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/q2a/end6"));
+        TextOutputFormat.setOutputPath(job, new Path("hdfs://dicvmc2.ie.cuhk.edu.hk:8020/user/s1155162650/q2a"));
         boolean b = job.waitForCompletion(true);
 
         return b ? 0 : 1;
