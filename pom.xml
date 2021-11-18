@@ -30,6 +30,7 @@
         <module>homework2_c2</module>
         <module>homework2_d</module>
         <module>homework2_d2</module>
+        <module>homework3_q2a</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="homework3_q2a" />
         <module name="homework_a2" />
         <module name="homework_a3" />
         <module name="mygrouping" />
