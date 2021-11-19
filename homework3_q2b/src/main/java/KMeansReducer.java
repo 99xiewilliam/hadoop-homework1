@@ -7,6 +7,8 @@ import java.util.*;
 
 public class KMeansReducer extends Reducer<Text, Text, Text, NullWritable> {
     private Integer label = 1;
+    private Integer realLabelNum = 0;
+
     private Map<String, Integer> map = new HashMap<>();
 
 
@@ -30,7 +32,7 @@ public class KMeansReducer extends Reducer<Text, Text, Text, NullWritable> {
 
         for (Text value : values) {
             count++;
-            String[] split = value.toString().split(":");
+            String[] split = value.toString().split("@");
             imageLabel = split[0];
             if (map.containsKey(imageLabel)) {
                 map.put(imageLabel, map.get(imageLabel) + 1);
@@ -47,10 +49,15 @@ public class KMeansReducer extends Reducer<Text, Text, Text, NullWritable> {
 
         Set<String> set = map.keySet();
         String maxLabel = null;
+        String[] split = key.toString().split("@");
+
         for (String s : set) {
             System.out.println("****************");
             System.out.println((double)map.get(s) / count);
             System.out.println(s);
+            if (s.equals(split[1])) {
+                realLabelNum = map.get(s);
+            }
             if (map.get(s) > max) {
                 max = map.get(s);
                 maxLabel = s;
@@ -60,6 +67,8 @@ public class KMeansReducer extends Reducer<Text, Text, Text, NullWritable> {
         label++;
         String str2 = Arrays.toString(centroid) + ",";
         Double percent = (double)max / count;
-        context.write(new Text(str1 + str2 + count + "," + maxLabel + "," + percent), NullWritable.get());
+        //String[] split = key.toString().split("@");
+
+        context.write(new Text(str1 + str2 + count + "," + maxLabel + "," + percent + "," + realLabelNum + "@" + split[1]), NullWritable.get());
     }
 }

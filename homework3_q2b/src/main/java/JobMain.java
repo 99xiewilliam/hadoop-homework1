@@ -25,15 +25,15 @@ public class JobMain extends Configured implements Tool {
 //        config.set("yarn.resourcemanager.hostname", "dicvmc2.ie.cuhk.edu.hk");
         Job job = Job.getInstance(config, "mapreduce_q2a");
         job.setInputFormatClass(TextInputFormat.class);
-        TextInputFormat.addInputPath(job, new Path("/Users/xiexiaohao/Desktop/q2a/trainImageNew.txt"));
+        TextInputFormat.addInputPath(job, new Path("/Users/xiexiaohao/Desktop/q2a/trainImageNew2.txt"));
         //TextInputFormat.setMaxInputSplitSize(job, 10176799);
         job.setJarByClass(JobMain.class);
 
         //String uri = "/Users/xiexiaohao/Desktop/centroids.txt";
-        String uri = "/Users/xiexiaohao/IdeaProjects/DataSructure/centroid3.txt";
+        String uri = "/Users/xiexiaohao/IdeaProjects/DataSructure/centroid1.txt";
         //String uri1 = "/Users/xiexiaohao/IdeaProjects/DataSructure/trainLabels.txt";
         //String uri = "/Users/xiexiaohao/Desktop/q2a/endTest2/part-r-00000";
-        DistributedCache.addCacheFile(new URI(uri), config);
+        //DistributedCache.addCacheFile(new URI(uri), config);
         job.addCacheFile(new URI(uri));
         //job.addCacheFile(new URI(uri1));
 
@@ -49,22 +49,22 @@ public class JobMain extends Configured implements Tool {
         job.setOutputValueClass(Text.class);
 
         job.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/q2b3/endTest"));
+        TextOutputFormat.setOutputPath(job, new Path("/Users/xiexiaohao/Desktop/q2b1/endTest"));
         boolean b = job.waitForCompletion(true);
 
         //--------------------------------------------------
 
         Job job1 = Job.getInstance(config, "mapreduce_q2b");
         job1.setInputFormatClass(TextInputFormat.class);
-        TextInputFormat.addInputPath(job1, new Path("/Users/xiexiaohao/Desktop/q2a/trainImageNew.txt"));
+        TextInputFormat.addInputPath(job1, new Path("/Users/xiexiaohao/Desktop/q2a/trainImageNew2.txt"));
         //TextInputFormat.setMaxInputSplitSize(job, 10176799);
         job1.setJarByClass(JobMain.class);
 
         //String uri = "/Users/xiexiaohao/Desktop/centroids.txt";
         //String uri = "/Users/xiexiaohao/IdeaProjects/DataSructure/centroid1.txt";
         //String uri1 = "/Users/xiexiaohao/IdeaProjects/DataSructure/trainLabels.txt";
-        String uri2 = "/Users/xiexiaohao/Desktop/q2b3/endTest/part-r-00000";
-        DistributedCache.addCacheFile(new URI(uri2), config);
+        String uri2 = "/Users/xiexiaohao/Desktop/q2b1/endTest/part-r-00000";
+        //DistributedCache.addCacheFile(new URI(uri2), config);
         job1.addCacheFile(new URI(uri2));
         //job.addCacheFile(new URI(uri1));
 
@@ -80,22 +80,22 @@ public class JobMain extends Configured implements Tool {
         job1.setOutputValueClass(Text.class);
 
         job1.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job1, new Path("/Users/xiexiaohao/Desktop/q2b3/endTest2"));
+        TextOutputFormat.setOutputPath(job1, new Path("/Users/xiexiaohao/Desktop/q2b1/endTest2"));
         boolean b1 = job1.waitForCompletion(true);
 
         //-------------------------------------------------------------
 
         Job job2 = Job.getInstance(config, "mapreduce_q2c");
         job2.setInputFormatClass(TextInputFormat.class);
-        TextInputFormat.addInputPath(job2, new Path("/Users/xiexiaohao/Desktop/q2a/trainImageNew.txt"));
+        TextInputFormat.addInputPath(job2, new Path("/Users/xiexiaohao/Desktop/q2a/trainImageNew2.txt"));
         //TextInputFormat.setMaxInputSplitSize(job, 10176799);
         job2.setJarByClass(JobMain.class);
 
         //String uri = "/Users/xiexiaohao/Desktop/centroids.txt";
         //String uri = "/Users/xiexiaohao/IdeaProjects/DataSructure/centroid1.txt";
         //String uri1 = "/Users/xiexiaohao/IdeaProjects/DataSructure/trainLabels.txt";
-        String uri3 = "/Users/xiexiaohao/Desktop/q2b3/endTest2/part-r-00000";
-        DistributedCache.addCacheFile(new URI(uri3), config);
+        String uri3 = "/Users/xiexiaohao/Desktop/q2b1/endTest2/part-r-00000";
+        //DistributedCache.addCacheFile(new URI(uri3), config);
         job2.addCacheFile(new URI(uri3));
         //job.addCacheFile(new URI(uri1));
 
@@ -111,7 +111,7 @@ public class JobMain extends Configured implements Tool {
         job2.setOutputValueClass(Text.class);
 
         job2.setOutputFormatClass(TextOutputFormat.class);
-        TextOutputFormat.setOutputPath(job2, new Path("/Users/xiexiaohao/Desktop/q2b3/endTest3"));
+        TextOutputFormat.setOutputPath(job2, new Path("/Users/xiexiaohao/Desktop/q2b1/endTest3"));
         boolean b2 = job2.waitForCompletion(true);
 
         return b2 ? 0 : 1;

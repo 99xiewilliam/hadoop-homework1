@@ -12,6 +12,7 @@ import java.util.List;
 
 public class KMeansMapper extends Mapper<LongWritable, Text, Text, Text> {
     private List<String[]> centroids = new ArrayList<>();
+    private List<Double> labelNum = new ArrayList<>();
     //private List<String> imageLabels = new ArrayList<>();
 //    private Integer countList = 0;
 
@@ -38,6 +39,8 @@ public class KMeansMapper extends Mapper<LongWritable, Text, Text, Text> {
             str2 = split1[0];
             split2 = str2.split(",");
             centroids.add(split2);
+            String[] split3 = split1[1].split("@");
+            labelNum.add(Double.parseDouble(split3[1]));
         }
 
 //        String strImage;
@@ -50,7 +53,7 @@ public class KMeansMapper extends Mapper<LongWritable, Text, Text, Text> {
 
     @Override
     protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, Text>.Context context) throws IOException, InterruptedException {
-        String[] split = value.toString().split(":");
+        String[] split = value.toString().split("@");
         String[] split1 = split[1].split(",");
         Double sum = 0.0;
         Double secondNum = 0.0;
@@ -59,7 +62,6 @@ public class KMeansMapper extends Mapper<LongWritable, Text, Text, Text> {
         Double minDistance = Double.POSITIVE_INFINITY;
 
         for(String[] cent : centroids) {
-            count++;
             sum = 0.0;
             for(int i = 0; i < split1.length; i++) {
                 secondNum = Math.abs(Double.parseDouble(cent[i]) - Double.parseDouble(split1[i]));
@@ -71,9 +73,10 @@ public class KMeansMapper extends Mapper<LongWritable, Text, Text, Text> {
                 index = count;
                 //centroid = StringUtils.join(cent, ",");
             }
+            count++;
         }
         //System.out.println(imageLabels.get(0));
-        context.write(new Text(String.valueOf(index)), value);
+        context.write(new Text(index + "@" + labelNum.get(index)), value);
 //        imageLabels.remove(0);
 //        System.out.println("=========================");
 //        System.out.println(imageLabels.size());
