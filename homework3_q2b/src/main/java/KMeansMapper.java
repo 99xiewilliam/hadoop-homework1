@@ -40,6 +40,7 @@ public class KMeansMapper extends Mapper<LongWritable, Text, Text, Text> {
             split2 = str2.split(",");
             centroids.add(split2);
             String[] split3 = split1[1].split("@");
+            //获取每个centroid对应的label
             labelNum.add(Double.parseDouble(split3[1]));
         }
 

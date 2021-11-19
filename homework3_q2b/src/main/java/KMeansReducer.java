@@ -17,7 +17,8 @@ public class KMeansReducer extends Reducer<Text, Text, Text, NullWritable> {
         Integer max = 0;
         double[] centroid = new double[784];
         int count = 0;
-        String imageLabel;
+        //有9个已知的label
+        String imageLabel;//记录出现次数最多的label
         map.put("0.0", 0);
         map.put("1.0", 0);
         map.put("2.0", 0);
@@ -66,9 +67,11 @@ public class KMeansReducer extends Reducer<Text, Text, Text, NullWritable> {
         String str1 ="Centroid" + label + ":";
         label++;
         String str2 = Arrays.toString(centroid) + ",";
+        //去计算最大的数据占比
         Double percent = (double)max / count;
         //String[] split = key.toString().split("@");
 
+        //split[1]是该centroid最开始的label
         context.write(new Text(str1 + str2 + count + "," + maxLabel + "," + percent + "," + realLabelNum + "@" + split[1]), NullWritable.get());
     }
 }
